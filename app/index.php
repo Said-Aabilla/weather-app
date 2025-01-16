@@ -1,6 +1,7 @@
 <?php
 require_once '../vendor/autoload.php';
 use App\Routes\Router;
+use App\Exception\RouteException;
 
 
 $router = new Router();
@@ -26,7 +27,7 @@ if (isset($_GET['route'])) {
         if ($route) {
             list($controllerName, $methodName) = $route;
 
-            $controllerClass = 'App\\Controllers\\' . ucfirst($controllerName);
+            $controllerClass = 'App\\Http\\Controllers\\Api\\V1\\' . ucfirst($controllerName);
 
             $controller = new $controllerClass();
 
@@ -34,16 +35,16 @@ if (isset($_GET['route'])) {
                 if (method_exists($controller, $methodName)) {
                     $controller->$methodName();
                 } else {
-                    throw new Exception('Method not found in controller.');
+                    throw new RouteException('Method not found in controller!', 100);
                 }
             } else {
                 $controller->index();
             }
         } else {
-            throw new Exception('Route not found.');
+           throw new RouteException('Route not found!', 101);
         }
-    } catch (Exception $e) {
-        echo 'Caught exception: ', $e->getMessage(), "\n";
+    } catch (RouteException $e) {
+        $e->response_error();
     }
 
 }
