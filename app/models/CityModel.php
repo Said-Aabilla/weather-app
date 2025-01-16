@@ -1,5 +1,7 @@
 <?php
 namespace App\Models;
+use App\Entities\City;
+use App\Mapper\CityMapper;
 
 class CityModel extends BaseModel {
     
@@ -11,5 +13,13 @@ class CityModel extends BaseModel {
     }
 
 
+    public function findAll() {
+        $rows = parent::findAll();
+        $cities = [];
+        foreach ($rows as $row) {
+            $cities[] = CityMapper::DatabaseRowToCity($row);
+        }
+        return $rows;
+    }
   
 }

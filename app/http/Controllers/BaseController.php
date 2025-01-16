@@ -14,6 +14,4 @@ class BaseController {
         ]);
         exit();
     }
-
-
 }
