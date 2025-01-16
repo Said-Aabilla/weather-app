@@ -10,9 +10,9 @@ class RouteException extends Exception{
 
 
     public function response_error(){
-        http_response_code(500);
+        http_response_code(404);
         header('Content-Type: application/json');
-        echo json_encode(['message'=> $this->getMessage(), 'code' =>$this->getCode()]);
+        echo json_encode(['message'=> $this->getMessage(), 'error' =>true]);
         exit();
     }
 

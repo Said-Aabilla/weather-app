@@ -10,25 +10,25 @@ $router->setRoutes([
     'GET' => [
         'cities' => ['CityController', 'index'],
     ],
-
     'POST' => [
-
+        'cities' => ['CityController', 'create'],
     ]
 ]);
 
 if (isset($_GET['route'])) {
     $uri = trim($_GET['route'], '/');
     
-    $methode = $_SERVER['REQUEST_METHOD'];
+    $method = $_SERVER['REQUEST_METHOD'];
 
     try {
-        $route = $router->getRoute($methode, $uri);
+        $route = $router->getRoute($method, $uri);
 
         if ($route) {
             list($controllerName, $methodName) = $route;
 
             $controllerClass = 'App\\Http\\Controllers\\Api\\V1\\' . ucfirst($controllerName);
 
+           
             $controller = new $controllerClass();
 
             if ($methodName) {

@@ -12,7 +12,7 @@ class DatabaseException extends PDOException{
     public function response_error(){
         http_response_code(500);
         header('Content-Type: application/json');
-        echo json_encode(['message'=> $this->getMessage(), 'code' =>$this->getCode()]);
+        echo json_encode(['message'=> $this->getMessage(), 'error' =>true]);
         exit();
     }
 

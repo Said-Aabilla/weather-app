@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1;
 use  App\Http\Controllers\BaseController;
+use  App\Models\CityModel;
 
 class CityController extends BaseController {
 
+    private $cityModel;
+
+
+    public function __construct(){
+        $this->cityModel = new CityModel();
+    }
+
 
     public function index() {
-
-        if(10<11){
-            $this->redirect_error("not found", 404);
-        }
-        echo json_encode(['test'=> 'test']);
+        echo json_encode($this->cityModel->findAll());
     }
 
 
