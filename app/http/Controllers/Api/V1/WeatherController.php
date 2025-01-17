@@ -2,17 +2,43 @@
 
 namespace App\Http\Controllers\Api\V1;
 use  App\Http\Controllers\BaseController;
+use  App\Models\WeatherModel;
+use  App\Http\Requests\CreateWeatherRequest;
+use Exception;
+class WeatherController extends BaseController {
 
-class CityController extends BaseController {
 
+    private $weatherModel;
+    
 
-    public function index() {
-
-        if(10<11){
-            $this->redirect_error("not found", 404);
-        }
-        echo json_encode(['test'=> 'test']);
+    public function __construct(){
+        $this->weatherModel = new WeatherModel();
     }
 
+
+    public function index($city_id) {
+        header('Content-Type: application/json');
+        echo json_encode($this->weatherModel->findAllByCityId($city_id));        
+    }
+
+    public function create($input, $city_id) {
+        if (!$input) {
+            $this->redirect_error("Invalid JSON input.", 400);
+        }
+        try {
+            $input['city_id'] = $city_id;
+            // Validate 
+            $request = new CreateWeatherRequest($input);
+            $result = $this->weatherModel->create($request->all());
+            if($result){
+                $this->redirect_created_success('Weather Created Successfully for City: '.$city_id, $result);
+            }else{
+                $this->redirect_error('Error Creating the Weather for city '.$city_id, 424 );
+            }
+
+        } catch (Exception $e) {
+            $this->redirect_error($e->getMessage(), 400);
+        } 
+    }
 
 }

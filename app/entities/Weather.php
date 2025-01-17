@@ -77,10 +77,10 @@ class Weather implements JsonSerializable {
         $this->date = $date;
     }
 
-    public function jsonSerialize() {
+    public function jsonSerialize() : mixed {
         return [
             'id' => $this->id,
-            'city_id' => $this->cityId,
+            //'city_id' => $this->cityId,
             'temperature' => $this->temperature,
             'weather_condition' => $this->weatherCondition,
             'precipitation' => $this->precipitation,

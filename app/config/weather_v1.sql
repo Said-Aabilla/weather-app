@@ -7,10 +7,10 @@ CREATE TABLE IF NOT EXISTS `city` (
   `country` VARCHAR(64) NOT NULL,
   `city_label` VARCHAR(64) NOT NULL,
   `CREATION_DATE` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`city_id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
-INSERT INTO `city` (`city_id`, `country`, `city_label`) VALUES (1,"Iceland", "Reykjavik"), (2,"Ireland", "Dublin"), (3,"United Kingdom", "London"), (4,"Norway", "Oslo"), (5,"Sweden", "Stockholm"), (6,"Finland", "Helsinki"), (7,"Denmark", "Copenhagen"), (8,"Portugal", "Lisbon"), (9,"Spain", "Madrid"), (10,"France", "Paris"), (11,"Belgium", "Brussels"), (12,"Netherlands", "Amsterdam"), (13,"Germany", "Berlin"), (14,"Switzerland", "Bern"), (15,"Austria", "Vienna"), (16,"Italy", "Rome"), (17,"Greece", "Athens");
+INSERT INTO `city` (`id`, `country`, `city_label`) VALUES (1,"Iceland", "Reykjavik"), (2,"Ireland", "Dublin"), (3,"United Kingdom", "London"), (4,"Norway", "Oslo"), (5,"Sweden", "Stockholm"), (6,"Finland", "Helsinki"), (7,"Denmark", "Copenhagen"), (8,"Portugal", "Lisbon"), (9,"Spain", "Madrid"), (10,"France", "Paris"), (11,"Belgium", "Brussels"), (12,"Netherlands", "Amsterdam"), (13,"Germany", "Berlin"), (14,"Switzerland", "Bern"), (15,"Austria", "Vienna"), (16,"Italy", "Rome"), (17,"Greece", "Athens");
 
 CREATE TABLE IF NOT EXISTS `weather` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,

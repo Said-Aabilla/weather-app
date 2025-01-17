@@ -9,12 +9,17 @@ $router = new Router();
 $router->setRoutes([
     'GET' => [
         'cities' => ['CityController', 'index'],
+        'cities/{city_id}/weather' => ['WeatherController', 'index'],
     ],
     'POST' => [
         'cities' => ['CityController', 'create'],
+        'cities/{city_id}/weather' => ['WeatherController', 'create'],
     ],
     'PUT' => [
         'cities/{id}' => ['CityController', 'update'],
+    ],
+    'DELETE' => [
+        'cities/{id}' => ['CityController', 'delete'],
     ]
 ]);
 
@@ -39,6 +44,7 @@ foreach ($router->getRoutes($method) as $routePattern => $config) {
     }
 }
 
+
 try {
     if (!$routeConfig) {
         throw new RouteException('Route not found!', 101);
@@ -54,7 +60,12 @@ try {
     $controller = new $controllerClass();
 
     if (method_exists($controller, $methodName)) {
-        $controller->$methodName(...$routeParams);
+        if($method == 'POST' || $method == 'PUT' ){
+            $input = json_decode(file_get_contents('php://input'), true);
+            $controller->$methodName($input,...$routeParams);
+        }else{
+            $controller->$methodName(...$routeParams);
+        }
     } else {
         throw new RouteException('Method not found in controller!', 100);
     }

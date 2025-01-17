@@ -5,8 +5,8 @@ use App\Config\Database;
 use PDO;
 class BaseModel {
     
-    private $connection;
-    private $table_name;
+    protected $connection;
+    protected $table_name;
 
     public function __construct($table_name){
         $this->connection = Database::getConnection();

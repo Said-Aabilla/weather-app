@@ -21,8 +21,13 @@ class BaseController {
         $this->redirect([
              'message' => $message,
         ], 202, false);
-     }
+    }
 
+    public function redirect_deleted_success($message) {
+        $this->redirect([
+             'message' => $message,
+        ], 204 , false);
+    }
     private function redirect($message, $http_code, $bool_error){
         http_response_code($http_code);
         header('Content-Type: application/json');
