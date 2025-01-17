@@ -8,7 +8,7 @@ use  App\Http\Requests\DeleteCityRequest;
 use  App\Models\CityModel;
 use InvalidArgumentException;
 use Exception;
-
+use App\Http\Constants\HttpStatusCode;
 class CityController extends BaseController {
 
     private $cityModel;
@@ -27,7 +27,7 @@ class CityController extends BaseController {
 
     public function create($input) {
         if (!$input) {
-            $this->redirect_error("Invalid JSON input.", 400);
+            $this->redirect_error("Invalid JSON input.");
         }
         try {
             // Validate 
@@ -36,18 +36,18 @@ class CityController extends BaseController {
             if($result){
                 $this->redirect_created_success('City Created Successfully', $result);
             }else{
-                $this->redirect_error('Error Creating the city', 424 );
+                $this->redirect_error('Error Creating the city');
             }
 
         } catch (Exception $e) {
-            $this->redirect_error($e->getMessage(), 400);
+            $this->redirect_error($e->getMessage());
         } 
     }
 
     public function update($input, $id)
     {
         if (!$input) {
-            $this->redirect_error("Invalid JSON input.", 400);
+            $this->redirect_error("Invalid JSON input.");
         }
         try {
             // Validate 
@@ -57,11 +57,11 @@ class CityController extends BaseController {
             if($result){
                 $this->redirect_updated_success('City Updated Successfully');
             }else{
-                $this->redirect_error('Error Updating the city', 424);
+                $this->redirect_error('Error Updating the city');
             }
 
         } catch (Exception $e) {
-            $this->redirect_error($e->getMessage(), 400);
+            $this->redirect_error($e->getMessage());
         } 
     }
 
@@ -73,11 +73,11 @@ class CityController extends BaseController {
             if($result){
                 $this->redirect_deleted_success('City Deleted Successfully');
             }else{
-                $this->redirect_error('Error Deletng the city', 424);
+                $this->redirect_error('Error Deletng the city');
             }
 
         } catch (Exception $e) {
-            $this->redirect_error($e->getMessage(), 400);
+            $this->redirect_error($e->getMessage(),);
         } 
     }
 

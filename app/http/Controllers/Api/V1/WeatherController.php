@@ -24,7 +24,7 @@ class WeatherController extends BaseController {
 
     public function create($input, $city_id) {
         if (!$input) {
-            $this->redirect_error("Invalid JSON input.", 400);
+            $this->redirect_error("Invalid JSON input.");
         }
         try {
             $input['city_id'] = $city_id;
@@ -34,11 +34,11 @@ class WeatherController extends BaseController {
             if($result){
                 $this->redirect_created_success('Weather Created Successfully for City: '.$city_id, $result);
             }else{
-                $this->redirect_error('Error Creating the Weather for city '.$city_id, 424 );
+                $this->redirect_error('Error Creating the Weather for city '.$city_id );
             }
 
         } catch (Exception $e) {
-            $this->redirect_error($e->getMessage(), 400);
+            $this->redirect_error($e->getMessage());
         } 
     }
 
@@ -51,11 +51,11 @@ class WeatherController extends BaseController {
             if($result){
                 $this->redirect_deleted_success('Weather Deleted Successfully');
             }else{
-                $this->redirect_error('Error Deletng the Weather', 424);
+                $this->redirect_error('Error Deletng the Weather');
             }
 
         } catch (Exception $e) {
-            $this->redirect_error($e->getMessage(), 400);
+            $this->redirect_error($e->getMessage());
         } 
     }
 
