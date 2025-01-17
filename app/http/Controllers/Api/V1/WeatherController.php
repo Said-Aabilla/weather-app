@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 use  App\Http\Controllers\BaseController;
 use  App\Models\WeatherModel;
 use  App\Http\Requests\CreateWeatherRequest;
+use  App\Http\Requests\DeleteWeatherRequest;
 use Exception;
 class WeatherController extends BaseController {
 
@@ -40,5 +41,23 @@ class WeatherController extends BaseController {
             $this->redirect_error($e->getMessage(), 400);
         } 
     }
+
+
+    public function delete($city_id, $weather_id)
+    {
+        try {
+            $request = new DeleteWeatherRequest($city_id, $weather_id);
+            $result = $this->weatherModel->delete($request->getWeatherId());
+            if($result){
+                $this->redirect_deleted_success('Weather Deleted Successfully');
+            }else{
+                $this->redirect_error('Error Deletng the Weather', 424);
+            }
+
+        } catch (Exception $e) {
+            $this->redirect_error($e->getMessage(), 400);
+        } 
+    }
+
 
 }

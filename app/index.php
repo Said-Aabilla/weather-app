@@ -20,6 +20,7 @@ $router->setRoutes([
     ],
     'DELETE' => [
         'cities/{id}' => ['CityController', 'delete'],
+        'cities/{city_id}/weather/{weather_id}' => ['WeatherController', 'delete'],
     ]
 ]);
 
