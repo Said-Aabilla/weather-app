@@ -20,4 +20,13 @@ class Router
 
         return null;
     }
+
+    public function getRoutes($method)
+    {
+        if (array_key_exists($method, $this->routes)) {
+            return $this->routes[$method];
+        }
+
+        return null;
+    }
 }

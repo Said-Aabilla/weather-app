@@ -41,7 +41,6 @@ class BaseModel {
 
 
     public function update($data) {
-
         $id = $data['id'];
         unset($data['id']);
 
@@ -75,7 +74,11 @@ class BaseModel {
             $stmt->bindValue(":$column", $value);
         }
 
-        return $stmt->execute();
+        if ($stmt->execute()){
+            return $this->connection->lastInsertId();
+        }
+        else 
+           return null;
     }
 
 }

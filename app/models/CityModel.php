@@ -17,9 +17,9 @@ class CityModel extends BaseModel {
         $rows = parent::findAll();
         $cities = [];
         foreach ($rows as $row) {
-            $cities[] = CityMapper::DatabaseRowToCity($row);
+            $cities[] = CityMapper::databaseRowToCity($row);
         }
-        return $rows;
+        return $cities;
     }
-  
+
 }

@@ -3,7 +3,7 @@ CREATE DATABASE `weather_city`;
 USE `weather_city`;
 
 CREATE TABLE IF NOT EXISTS `city` (
-  `city_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `country` VARCHAR(64) NOT NULL,
   `city_label` VARCHAR(64) NOT NULL,
   `CREATION_DATE` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `city` (
 INSERT INTO `city` (`city_id`, `country`, `city_label`) VALUES (1,"Iceland", "Reykjavik"), (2,"Ireland", "Dublin"), (3,"United Kingdom", "London"), (4,"Norway", "Oslo"), (5,"Sweden", "Stockholm"), (6,"Finland", "Helsinki"), (7,"Denmark", "Copenhagen"), (8,"Portugal", "Lisbon"), (9,"Spain", "Madrid"), (10,"France", "Paris"), (11,"Belgium", "Brussels"), (12,"Netherlands", "Amsterdam"), (13,"Germany", "Berlin"), (14,"Switzerland", "Bern"), (15,"Austria", "Vienna"), (16,"Italy", "Rome"), (17,"Greece", "Athens");
 
 CREATE TABLE IF NOT EXISTS `weather` (
-  `weather_id` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `city_id` VARCHAR(64) NOT NULL,
   `temperature` FLOAT(5,3)	 NOT NULL,
   `weather` ENUM("SUNNY", "RAINY", "WINDY", "FOGGY", "SNOW", "HAIL", "SHOWER", "LIGHTNING", "RAINDBOW", "HURRICANE") NOT NULL,
