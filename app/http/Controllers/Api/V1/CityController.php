@@ -26,9 +26,6 @@ class CityController extends BaseController {
 
 
     public function create($input) {
-        if (!$input) {
-            $this->redirect_error("Invalid JSON input.");
-        }
         try {
             // Validate 
             $request = new CreateCityRequest($input);
@@ -46,9 +43,6 @@ class CityController extends BaseController {
 
     public function update($input, $id)
     {
-        if (!$input) {
-            $this->redirect_error("Invalid JSON input.");
-        }
         try {
             // Validate 
             $input['id']=$id;

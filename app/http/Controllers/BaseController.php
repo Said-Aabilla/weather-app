@@ -4,29 +4,29 @@ namespace App\Http\Controllers;
 use App\Http\Constants\HttpStatusCode;
 class BaseController {
 
-    public function redirect_error($error_message, $http_status_code=HttpStatusCode::BAD_REQUEST) {
+    public function redirect_error($error_message, $http_status_code=0) {
         $this->redirect([
             'message' => $error_message,
-        ], $http_status_code, false);
+        ], $http_status_code == 0 ? HttpStatusCode::$BAD_REQUEST : $http_status_code, false);
     }
 
     public function redirect_created_success($message, $id) {
        $this->redirect([
             'message' => $message,
             'id'=>$id
-       ], HttpStatusCode::CREATED, false);
+       ], HttpStatusCode::$CREATED, false);
     }
 
     public function redirect_updated_success($message) {
         $this->redirect([
              'message' => $message,
-        ], HttpStatusCode::UPDATED, false);
+        ], HttpStatusCode::$UPDATED, false);
     }
 
     public function redirect_deleted_success($message) {
         $this->redirect([
              'message' => $message,
-        ], HttpStatusCode::DELETED , false);
+        ], HttpStatusCode::$DELETED , false);
     }
     private function redirect($message, $http_code, $bool_error){
         http_response_code($http_code);

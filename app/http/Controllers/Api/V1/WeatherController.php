@@ -23,9 +23,6 @@ class WeatherController extends BaseController {
     }
 
     public function create($input, $city_id) {
-        if (!$input) {
-            $this->redirect_error("Invalid JSON input.");
-        }
         try {
             $input['city_id'] = $city_id;
             // Validate 
