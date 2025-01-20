@@ -3,21 +3,28 @@
 namespace App\Http\Controllers\Api\V1;
 use  App\Http\Controllers\BaseController;
 use  App\Models\WeatherModel;
+use  App\Models\CityModel;
 use  App\Http\Requests\CreateWeatherRequest;
 use  App\Http\Requests\DeleteWeatherRequest;
 use Exception;
+use App\Exception\EntityNotFoundException;
 class WeatherController extends BaseController {
 
 
     private $weatherModel;
+    private $cityModel;
     
 
     public function __construct(){
         $this->weatherModel = new WeatherModel();
+        $this->cityModel = new CityModel();
     }
 
 
     public function index($city_id) {
+        if (!$this->cityModel->findById($city_id)) {
+            throw new EntityNotFoundException("The city was not found by id: " . $city_id);
+        }
         header('Content-Type: application/json');
         echo json_encode($this->weatherModel->findAllByCityId($city_id));        
     }
